@@ -1,0 +1,3 @@
+image:
+  repository: bitcoin_registry.azurecr.io/service-b
+  tag: latest

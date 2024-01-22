@@ -1,0 +1,51 @@
+# Cluster details
+# 1.      Use Azure and AKS.
+
+# 2.      Set up K8S cluster , with RBAC enabled.
+
+# 3.      Cluster should have 2 services – A and B.
+
+# 4.      Cluster should have Ingress controller, redirecting traffic by URL: xxx/service-A or xxx/service-B.
+
+# 5.      Service-A should not be able to “talk” with Service-B (policy disabled).
+
+# 6.      For Service A:write a script\application which retrieves the bitcoin value in dollar from an API on the web (you should find one) every minute and prints it, And also every 10 minutes it should print the average value of the last 10 minutes.
+
+# General Guideline
+# 1.      Please, consider this as process for setting up “production-ready” cluster by all meaning, the following cluster buildout should be automated and fully repeatable, Pods should utilize liveness and readiness.
+
+# 2.      Code should be supportable.
+
+# 3.      Please, share cluster templates and .yaml files as GitHub repo / zip file.
+
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx # This annotation tells Kubernetes what ingress controller to use. In this case, we're using the nginx ingress controller.
+    nginx.ingress.kubernetes.io/ssl-redirect: "false" # This annotation tells the ingress controller to not redirect HTTP requests to HTTPS. This is necessary because we're using HTTP for this demo.
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$1 # This is the important part of the configuration that rewrites the URL to remove the /service-a prefix before sending the request to the service. $1 is a regex capture group that captures everything after /service-a and passes it to the rewrite-target annotation.
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /service-a(/|$)(.*) # This is the path that the ingress controller will match against incoming requests. The regex captures everything after /service-a and passes it to the rewrite-target annotation. The /|$ part of the regex is necessary to match the /service-a path itself. Without it, the ingress controller would not match requests to /service-a. The (.*) part of the regex captures everything after /service-a. This is the part that is passed to the rewrite-target annotation. The /|$ part of the regex is necessary to match the /service-a path itself. Without it, the ingress controller would not match requests to /service-a.  The (.*) part of the regex captures everything after /service-a. This is the part that is passed to the rewrite-target annotation.  The /|$ part of the regex is necessary to match the /service-a path itself. Without it, the ingress controller would not match requests to /service-a.  The (.*) part of the regex captures everything after /service-a. This is the part that is passed to the rewrite-target annotation.
+        pathType: Prefix # This tells the ingress controller to match requests to /service-a and anything after it. Without this, the ingress controller would only match requests to /service-a.
+        backend:
+          service:
+            name: service-a 
+            port:
+              number: 80
+      - path: /service-b(/|$)(.*) 
+        pathType: Prefix
+        backend:
+          service:
+            name: service-b
+            port:
+              number: 80
+
+#q: where is the policy disabled?
+#a: I think it is in the service.yaml file

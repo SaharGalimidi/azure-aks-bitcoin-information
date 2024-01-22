@@ -1,31 +1,7 @@
-<!-- General setup
-1.      Create for yourself Azure account.
-
-Cluster details
-1.      Use Azure and AKS.
-
-2.      Set up K8S cluster , with RBAC enabled.
-
-3.      Cluster should have 2 services – A and B.
-
-4.      Cluster should have Ingress controller, redirecting traffic by URL: xxx/service-A or xxx/service-B.
-
-5.      Service-A should not be able to “talk” with Service-B (policy disabled).
-
-6.      For Service A:write a script\application which retrieves the bitcoin value in dollar from an API on the web (you should find one) every minute and prints it, And also every 10 minutes it should print the average value of the last 10 minutes.
-
-General Guideline
-1.      Please, consider this as process for setting up “production-ready” cluster by all meaning, the following cluster buildout should be automated and fully repeatable, Pods should utilize liveness and readiness.
-
-2.      Code should be supportable.
-
-3.      Please, share cluster templates and .yaml files as GitHub repo / zip file. -->
-
-
 # azure-aks-bitcoin-information
 
 ## Overview
-This project is a simple example of how to create a Kubernetes cluster on Azure using AKS, and how to deploy a simple application that retrieves the bitcoin value in dollar from an API on the web every minute and prints it, And also every 10 minutes it should print the average value of the last 10 minutes.
+This project demonstrates the creation of a Kubernetes cluster on Azure using AKS and the deployment of a simple application. The application retrieves the bitcoin value in dollars from an API every minute and prints it. Additionally, every 10 minutes, it prints the average value of the last 10 minutes.
 
 ## Prerequisites
 - Azure account
@@ -34,6 +10,7 @@ This project is a simple example of how to create a Kubernetes cluster on Azure 
 - Docker
 - Python 3.6 or higher
 - Terraform
+- Helm
 
 ## Setup
 ### Create Azure account
@@ -54,20 +31,84 @@ Install Python following the instructions [here](https://www.python.org/download
 ### Install Terraform
 Install Terraform following the instructions [here](https://learn.hashicorp.com/terraform/getting-started/install.html).
 
-## Create Kubernetes cluster on Azure
-### Login to Azure
-Login to Azure using the Azure CLI:
-```bash
-az login
-```
+### Install Helm
+Install Helm following the instructions [here](https://helm.sh/docs/intro/install/).
 
-### Run Terraform
-Run Terraform to create the Kubernetes cluster:
-```bash
-cd terraform
-terraform init
-terraform apply --auto-approve -var-file="terraform.tfvars"
-```
+## Build and Push Docker Image to Azure Container Registry
+1. **Create Kubernetes cluster on Azure with Terraform:**
+   - Run Terraform to create the infrastructure, including the Azure Container Registry (ACR) and the Azure Kubernetes Service (AKS) cluster.
+     ```bash
+     cd terraform
+     terraform init
+     terraform apply --auto-approve -var-file="variables.tfvars" | tee terraform_output.txt
+     ```
+   - Extract the ACR name from the Terraform output:
+     ```bash
+     ACR_NAME=$(grep -oP -m 1 'acr_name\s+=\s+"\K[^"]+' terraform_output.txt)
+     ```
 
+2. **Build and Push Docker Image Locally:**
+   - After Terraform has provisioned the ACR, use Docker commands to build your Docker image locally and push it to the Azure Container Registry.
+     ```bash
+     # Log in to Azure Container Registry
+     az acr login --name $ACR_NAME
 
+     # Build Docker image
+     cd ..
+     cd service-a
+     docker build -t $ACR_NAME.azurecr.io/your-image:tag .
+     cd ..
+     cd service-b
+     docker build -t $ACR_NAME.azurecr.io/your-image:tag .
+     # Push Docker images to ACR
+     docker push $ACR_NAME.azurecr.io/your-image:tag
+     ```
 
+3. **Deploy Application with Helm:**
+   - After pushing the Docker image to the Azure Container Registry and creating the AKS cluster, use Helm to deploy your application.
+     ```bash
+     # Deploy application with Helm
+     cd ..
+     helm install my-release ./charts/service-a/
+     helm install my-release ./charts/service-b/
+     ```
+
+## Cleanup
+- Ensure that you clean up resources after testing or when they are no longer needed.
+
+1. **Delete Helm Release:**
+   - Delete the Helm release to uninstall the deployed application.
+     ```bash
+     # Delete Helm release
+     helm uninstall my-release
+     ```
+
+2. **Destroy Terraform Resources:**
+   - Destroy the Terraform-managed resources to delete the AKS cluster and Azure Container Registry.
+     ```bash
+     # Navigate to the terraform directory
+     cd terraform
+     # Destroy Terraform resources
+     terraform destroy --auto-approve -var-file="variables.tfvars"
+     ```
+
+3. **Delete Docker Image from Azure Container Registry (Optional):**
+   - If you want to remove the Docker image from the Azure Container Registry, you can do so using the Azure CLI.
+     ```bash
+     # Delete Docker image from ACR (optional)
+     az acr repository delete --name $ACR_NAME --repository your-image --yes
+     ```
+
+4. **Remove Local Docker Image (Optional):**
+   - Optionally, remove the locally built Docker image.
+     ```bash
+     # Remove local Docker image (optional)
+     docker rmi $ACR_NAME.azurecr.io/your-image:tag
+     ```
+
+## Additional Notes
+- Ensure that the necessary infrastructure (ACR, AKS) is in place before deploying your application.
+- Consider dependencies and ensure each step completes successfully before moving to the next one.
+- Include error handling and rollback procedures in case any step encounters issues.
+- Update the placeholder values in commands and configurations with your specific details.
+- Refer to individual directories for more specific information on Helm charts, Dockerfiles, and Terraform configurations.

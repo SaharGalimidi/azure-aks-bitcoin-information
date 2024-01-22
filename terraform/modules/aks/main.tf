@@ -2,9 +2,6 @@ provider "azurerm" {
   features {}
 }
 
-# module "bitcoin-rg" {
-#   source = "./terraform/modules/rg"
-# }
 
 resource "azurerm_kubernetes_cluster" "bitcoin-aks" {
   name                = var.cluster_name

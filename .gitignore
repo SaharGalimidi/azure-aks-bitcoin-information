@@ -1,10 +1,4 @@
 .terraform
 .terraform.*
 terraform.tf*
-
-
-#temp file staying locally
-rg 
-
-
 Links and guides.txt
