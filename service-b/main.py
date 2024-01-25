@@ -1,20 +1,32 @@
-# service-b/main.py
-from flask import Flask, jsonify, request
+# service_b/main.py
+from flask import Flask, jsonify
+import requests
+import datetime
+
 
 app = Flask(__name__)
 
-@app.route('/display_bitcoin_info', methods=['GET'])
-def display_bitcoin_info():
-    # Assuming service-b is calling service-a to get the Bitcoin information
-    # Adjust the URL and headers as needed based on your actual service-a API
-    service_a_url = 'http://service-a-service-a.default.svc.cluster.local:5000/current_bitcoin_value'
-    response = requests.get(service_a_url)
+API_ENDPOINT = 'https://api.coingecko.com/api/v3/simple/price'
 
-    if response.status_code == 200:
-        bitcoin_info = response.json()
-        return jsonify({"service_b_display": bitcoin_info})
-    else:
-        return jsonify({"service_b_display": "Error getting Bitcoin information from Service A"})
+
+@app.route('/', methods=['GET'])
+def index():
+    return "Hello from Service B please use /service-b to get the coin value you want"
+
+@app.route('/service-b', methods=['GET'])
+def get_service_a_data(coin: str = 'bitcoin', currency: str = 'usd'):
+    try:
+        params = {'ids': coin, 'vs_currencies': currency}
+        response = requests.get(API_ENDPOINT, params=params)
+        response.raise_for_status()
+        data = response.json()
+        coin_value = data.get(coin).get(currency)
+        print(
+            f"Current {coin} Value (Service B): {coin_value} {currency} {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+        return jsonify({coin: coin_value, "timestamp": datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')})
+    except requests.exceptions.RequestException as e:
+        return jsonify({"error": f"Error fetching data from Service B: {e}"}), 500
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)

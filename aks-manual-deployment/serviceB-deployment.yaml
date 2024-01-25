@@ -1,0 +1,53 @@
+# path: azure-aks-bitcoin-information/aks-manual-deployment/serviceB-deployment.yaml
+# https://codefresh.io/learn/kubernetes-deployment/kubernetes-deployment-yaml/
+#kube deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-b
+  labels:
+    app: service-b
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-b
+  template:
+    metadata:
+      labels:
+        app: service-b
+    spec:
+      containers:
+      - name: service-b
+        image: bitcoinregistry.azurecr.io/service-b:latest
+        ports:
+        - containerPort: 5000
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 5000
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 5000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+
+---
+
+#https://matthewpalmer.net/kubernetes-app-developer/articles/service-kubernetes-example-tutorial.html
+#kube service
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-b
+spec:
+  type: ClusterIP
+  selector:
+    app: service-b
+  ports:
+  - name: http
+    port: 5000
+    targetPort: 5000

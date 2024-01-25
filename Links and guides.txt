@@ -1,0 +1,17 @@
+https://learn.microsoft.com/en-us/azure/aks/learn/quick-kubernetes-deploy-portal?tabs=azure-cli
+https://learn.microsoft.com/en-us/azure/aks/concepts-clusters-workloads
+https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles
+https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/resources/service_principal_password
+https://www.youtube.com/watch?v=I-MbnfNcikk&t=1121s
+https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#dns_prefix
+https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/managed_service_identity
+https://registry.terraform.io/providers/hashicorp/azurerm/2.17.0/docs/resources/kubernetes_cluster
+https://learn.microsoft.com/en-us/azure/aks/quickstart-helm?tabs=azure-cli
+https://learn.microsoft.com/en-us/azure/container-registry/container-registry-best-practices
+https://www.youtube.com/watch?v=-ykwb1d0DXU
+https://kubernetes.github.io/ingress-nginx/user-guide/basic-usage/
+https://codefresh.io/learn/kubernetes-deployment/kubernetes-deployment-yaml/
+https://matthewpalmer.net/kubernetes-app-developer/articles/service-kubernetes-example-tutorial.html
+https://matthewpalmer.net/kubernetes-app-developer/articles/
+https://matthewpalmer.net/kubernetes-app-developer/articles/kubernetes-ingress-guide-nginx-example.html
+https://kubernetes.github.io/ingress-nginx/deploy/
