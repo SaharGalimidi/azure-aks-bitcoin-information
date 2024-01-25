@@ -22,6 +22,9 @@ Install Azure CLI following the instructions [here](https://docs.microsoft.com/e
 ### Install kubectl
 Install kubectl following the instructions [here](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
 
+### Install Azure Kubelogin
+Install kubelogin following the instructions [here](https://azure.github.io/kubelogin/install.html)
+
 ### Install Docker
 Install Docker following the instructions [here](https://docs.docker.com/install/).
 
