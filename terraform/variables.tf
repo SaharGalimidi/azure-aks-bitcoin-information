@@ -14,6 +14,12 @@ variable "cluster_name" {
   description = "Name of the AKS cluster"
 }
 
+variable "registry_name" {
+  type        = string
+  description = "Name of the Azure Container Registry"
+
+}
+
 variable "dns_prefix" {
   type        = string
   description = "DNS prefix for the AKS cluster"
@@ -29,11 +35,22 @@ variable "azure_active_directory_role_based_access_control" {
   type        = bool
   description = "Enable Azure Active Directory Role Based Access Control"
   default     = true
-  
 }
 
-variable "role_definition_name" {
+variable "role_rbac_cluster_admin" {
   type        = string
   description = "Role assignment"
   default     = "Azure Kubernetes Service RBAC Cluster Admin"
+}
+
+variable "role_acr_pull" {
+  type        = string
+  description = "Role assignment"
+  default     = "AcrPull"
+}
+
+variable "role_registry_contributor" {
+  type        = string
+  description = "Role assignment"
+  default     = "Contributor"
 }

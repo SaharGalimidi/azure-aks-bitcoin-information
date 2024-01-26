@@ -8,33 +8,33 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: service-a
-            port:
-              number: 5000
-      - path: /service-a
-        pathType: Prefix
-        backend:
-          service:
-            name: service-a
-            port:
-              number: 5000
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: service-b
-            port:
-              number: 5000
-      - path: /service-b
-        pathType: Prefix
-        backend:
-          service:
-            name: service-b
-            port:
-              number: 5000
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: service-a
+                port:
+                  number: 5000
+          - path: /service-a
+            pathType: Prefix
+            backend:
+              service:
+                name: service-a
+                port:
+                  number: 5000
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: service-b
+                port:
+                  number: 5000
+          - path: /service-b
+            pathType: Prefix
+            backend:
+              service:
+                name: service-b
+                port:
+                  number: 5000

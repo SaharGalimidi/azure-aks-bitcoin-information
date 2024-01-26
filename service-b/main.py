@@ -13,6 +13,7 @@ API_ENDPOINT = 'https://api.coingecko.com/api/v3/simple/price'
 def index():
     return "Hello from Service B please use /service-b to get the coin value you want"
 
+
 @app.route('/service-b', methods=['GET'])
 def get_service_a_data(coin: str = 'bitcoin', currency: str = 'usd'):
     try:

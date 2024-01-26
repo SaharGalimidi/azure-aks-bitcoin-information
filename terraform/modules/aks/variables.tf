@@ -12,7 +12,7 @@ variable "dns_prefix" {
 variable "resource_group_name" {
   type        = string
   description = "Name of the resource group"
-  
+
 }
 
 variable "role_based_access_control_enabled" {
@@ -28,10 +28,22 @@ variable "azure_active_directory_role_based_access_control" {
 }
 
 
-variable "role_definition_name" {
+variable "role_cluster_admin" {
   type        = string
   description = "Role assignment"
-  default = "Azure Kubernetes Service RBAC Cluster Admin"
+  default     = "Azure Kubernetes Service RBAC Cluster Admin"
+}
+
+variable "role_rbac_admin" {
+  type        = string
+  description = "Role assignment"
+  default     = "Azure Kubernetes Service RBAC Admin"
+}
+
+variable "role_acr_pull" {
+  type        = string
+  description = "Role assignment"
+  default     = "AcrPull"
 }
 
 variable "location" {
