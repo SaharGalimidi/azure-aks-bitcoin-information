@@ -1,4 +1,0 @@
-apiVersion: v2
-name: service-a
-description: A Helm chart for deploying Service A
-version: 0.1.0

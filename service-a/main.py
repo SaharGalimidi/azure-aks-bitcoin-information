@@ -1,31 +1,67 @@
 # service_a/main.py
-from flask import Flask, jsonify
+from flask import Flask
 import requests
 import schedule
 import datetime
 import time
+import json
 from threading import Thread
+from collections import OrderedDict
 
 app = Flask(__name__)
 coin_values = []
+current_value = OrderedDict({
+    'coin': None,
+    'value': None,
+    'currency': None,
+    'average_value': None,
+    'timestamp': None
+})
 
-last_btc_price = ""
-
-API_ENDPOINT = 'https://api.coingecko.com/api/v3/simple/price'
+API_ENDPOINT = 'https://min-api.cryptocompare.com/data/price'
 
 
-def fetch_coin_value(api_endpoint: str = API_ENDPOINT, coin: str = 'bitcoin', currency: str = 'usd') -> float:
+def fetch_coin_value(api_endpoint: str = API_ENDPOINT, coin: str = 'BTC', currency: str = 'USD') -> float:
     try:
-        global last_btc_price
-        api_endpoint = f"{api_endpoint}?ids={coin}&vs_currencies={currency}"
+        api_endpoint = f"{api_endpoint}?fsym={coin}&tsyms={currency}"
         response = requests.get(api_endpoint)
         response.raise_for_status()
         data = response.json()
-        coin_value = data.get(coin).get(currency)
-        last_btc_price = coin_value
+        coin_value = data.get(currency)
         return coin_value
     except requests.exceptions.RequestException as e:
-        return {f"(value in {currency} (latest price since there are too many requests)": last_btc_price}
+        return json.dumps({f"(value in {currency} (latest price since there are too many requests)": current_value}, indent=4)
+
+
+def get_bitcoin_value(api_endpoint: str = API_ENDPOINT, coin: str = 'BTC', currency: str = 'USD'):
+    try:
+        with app.app_context():
+            global current_value
+            coin_value = fetch_coin_value(
+                api_endpoint=api_endpoint, coin=coin, currency=currency)
+            current_value['value'] = coin_value
+            current_value['coin'] = coin
+            current_value['currency'] = currency
+            current_value['timestamp'] = datetime.datetime.now().strftime(
+                '%Y-%m-%d %H:%M:%S')
+            if coin_value is not None:
+                print(f"Current {coin} Value (Service A): {current_value}")
+                coin_values.append(coin_value)
+                if len(coin_values) >= 10:
+                    average_value = sum(coin_values) / len(coin_values)
+                    print(
+                        f"Average {coin} Value (Service A): {average_value} {currency} {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+                    coin_values.clear()
+                    current_value['average_value'] = average_value
+                    return json.dumps(current_value, indent=4)
+            else:
+                print("Error fetching Bitcoin value")
+                return json.dumps({f"error": "Failed to fetch {coin} value"}, indent=4)
+
+            return json.dumps(current_value, indent=4)
+    except Exception as e:
+        print(e)
+        return json.dumps({f"error": "Failed to fetch {coin} value"}, indent=4)
 
 
 @app.route('/', methods=['GET'])
@@ -33,37 +69,11 @@ def index():
     return "Hello from Service A please use /service-a to get the coin value you want"
 
 
-def get_bitcoin_value(api_endpoint: str = API_ENDPOINT, coin: str = 'bitcoin', currency: str = 'usd'):
-    try:
-        with app.app_context():
-            coin_value = fetch_coin_value(
-                api_endpoint=api_endpoint, coin=coin, currency=currency)
-
-            if coin_value is not None:
-                print(
-                    f"Current {coin} Value (Service A): {coin_value} {currency} {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-                coin_values.append(coin_value)
-
-                if len(coin_values) >= 10:
-                    average_value = sum(coin_values) / len(coin_values)
-                    print(
-                        f"Average {coin} Value (Service A): {average_value} {currency} {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-                    coin_values.clear()
-                    return jsonify({coin: str(coin_value) + f" {currency}", f"average {coin}": str(average_value) + f" {currency}", "timestamp": datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')})
-            else:
-                print("Error fetching Bitcoin value")
-                # Return an error response
-                return jsonify({f"error": "Failed to fetch {coin} value"}), 500
-
-            return jsonify({coin: str(coin_value) + f" {currency}", "timestamp": datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')})
-    except Exception as e:
-        print(e)
-        return jsonify({f"error": "Failed to fetch {coin} value"}), 500
-
-
 @app.route('/service-a', methods=['GET'])
 def service_a():
-    return get_bitcoin_value()
+    if current_value['average_value'] is None:
+        current_value['average_value'] = 'No average value yet since there are not enough values to calculate it please wait a 10 minutes'
+    return json.dumps(current_value, indent=4, separators=(',', ': '))
 
 
 def main():
@@ -76,10 +86,6 @@ def main():
 
 
 if __name__ == "__main__":
-    # Run main function in a separate thread
     thread = Thread(target=main)
     thread.start()
-
-    # Start Flask server
-    # Allow connections from all network interfaces
     app.run(host='0.0.0.0', port=5000)

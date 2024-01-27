@@ -1,0 +1,43 @@
+# path: azure-aks-bitcoin-information\my-helm-chart\templates\network-policy.yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: denay-a-to-b
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      name: {{ .Values.service.serviceA.name}}
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          name: {{ .Values.service.serviceB.name}}
+    ports:
+    - protocol: TCP
+      port: 5000
+
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: denay-b-to-a
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      name: {{ .Values.service.serviceB.name}}
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          name: {{ .Values.service.serviceA.name}}
+    ports:
+    - protocol: TCP
+      port: 5000

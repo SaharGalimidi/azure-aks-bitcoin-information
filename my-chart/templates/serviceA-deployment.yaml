@@ -1,0 +1,48 @@
+# path: azure-aks-bitcoin-information\my-helm-chart\templates\serviceA-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.service.serviceA.name }}
+  labels:
+    app: {{ .Values.service.serviceA.name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.service.serviceA.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.service.serviceA.name }}
+    spec:
+      containers:
+        - name: {{ .Values.service.serviceA.name }}
+          image: {{ .Values.image.serviceA }}
+          ports:
+            - containerPort: {{ .Values.service.serviceA.port }}
+          livenessProbe:
+            httpGet:
+              path: /
+              port: {{ .Values.service.serviceA.port }}
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          readinessProbe:
+            httpGet:
+              path: /
+              port: {{ .Values.service.serviceA.port }}
+            initialDelaySeconds: 5
+            periodSeconds: 10
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.service.serviceA.name }}
+spec:
+  type: {{ .Values.service.serviceA.type}}
+  selector:
+    app: {{ .Values.service.serviceA.name }}
+  ports:
+    - name: http
+      port: {{ .Values.service.serviceA.port }}
+      targetPort: {{ .Values.service.serviceA.port }}

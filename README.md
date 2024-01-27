@@ -8,7 +8,7 @@ This project demonstrates the creation of a Kubernetes cluster on Azure using AK
 - Azure CLI
 - kubectl
 - Docker
-- Python 3.6 or higher
+- Python 3.9 or higher
 - Terraform
 - Helm
 
@@ -40,7 +40,7 @@ Install Helm following the instructions [here](https://helm.sh/docs/intro/instal
 ## Note
 - The commands in this README are written for a Linux environment. If you are using a different operating system, you may need to adjust the commands accordingly.
 
-## Build and Push Docker Image to Azure Container Registry
+## Deploy services to AKS manually using terraform and kubectl
 1. **Create Kubernetes cluster on Azure with Terraform:**
    - Connect to your Azure account using the Azure CLI.
      ```bash
@@ -51,14 +51,15 @@ Install Helm following the instructions [here](https://helm.sh/docs/intro/instal
       ```bash
         cd terraform
       ```
-    - See the deployment plan before applying it
-      ```bash
-        terraform plan -var-file="variables.tfvars"
-      ```
     - Download the Azure provider and initialize Terraform
       ```bash
         terraform init
       ```
+    - See the deployment plan before applying it
+      ```bash
+        terraform plan -var-file="variables.tfvars"
+      ```
+
     - Apply the deployment plan
       ```bash
         terraform apply --auto-approve -var-file="variables.tfvars" | tee terraform_output.txt
@@ -75,118 +76,49 @@ Install Helm following the instructions [here](https://helm.sh/docs/intro/instal
         CLUSTER_NAME=$(grep -oP -m 1 'cluster_name\s+=\s+"\K[^"]+' terraform_output.txt)
       ```
 
-    - Verify that the resource group name and cluster name were extracted correctly
-      ```bash
-        echo $RG_NAME
-      ```
-
-      ```bash
-        echo $CLUSTER_NAME
-      ```
-
       ```bash
         az aks get-credentials --resource-group $RG_NAME --name $CLUSTER_NAME
       ```
-
-    - Extract the ACR name from the Terraform output:
+      press y to continue
 
       ```bash
         ACR_NAME=$(grep -oP -m 1 'acr_name\s+=\s+"\K[^"]+' terraform_output.txt | tr '[:upper:]' '[:lower:]')
       ```
 
-    - Verify that the ACR name was extracted correctly
-
-      ```bash
-        echo $ACR_NAME
-      ```
-
 2. **Build and Push Docker Image Locally:**
    - After Terraform has provisioned the ACR, use Docker commands to build your Docker image locally and push it to the Azure Container Registry.
-     <!-- ```bash
-     # Log in to Azure Container Registry
-     az acr login --name $ACR_NAME
 
-     # Build Docker images
-     cd .. # make sure you are in the root directory (i.e. azure-aks-bitcoin-information)
-     docker build -t $ACR_NAME.azurecr.io/your-image-name:latest service-a/.
-
-     docker build -t $ACR_NAME.azurecr.io/your-image-name:latest service-b/.
-     # Push Docker images to ACR 
-     docker push $ACR_NAME.azurecr.io/your-image-name:latest
-     ``` -->
   - Log in to Azure Container Registry
      ```bash
      az acr login --name $ACR_NAME
      ```
-  - Build Docker images
+  - Build Docker images ( make sure you are in the root directory (i.e. azure-aks-bitcoin-information))
      ```bash
-      cd .. # make sure you are in the root directory (i.e. azure-aks-bitcoin-information)
+      cd .. 
       ```
       ```bash
-      docker build -t $ACR_NAME.azurecr.io/your-image-name:latest service-a/.
+      docker build -t $ACR_NAME.azurecr.io/service-a:latest service-a/.
       ```
       ```bash
-      docker build -t $ACR_NAME.azurecr.io/your-image-name:latest service-b/.
+      docker build -t $ACR_NAME.azurecr.io/service-b:latest service-b/.
       ```
   - Push Docker images to ACR
       ```bash
-        docker push $ACR_NAME.azurecr.io/your-image-name:latest
-      ```
-      
-3. **Deploy Application with kubectl:**
-   - After pushing the Docker image to the Azure Container Registry and creating the AKS cluster, use kubectl to deploy your application.
-
-   - Deploy nginx ingress controller for the cluster
-      source: https://kubernetes.github.io/ingress-nginx/deploy/
-     ```bash
-      kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/cloud/deploy.yaml
-     ```
-    - Get the external IP of the ingress controller
-     ```bash
-      EXTERNAL_ADDRESS=$(kubectl get svc ingress-nginx-controller -n ingress-nginx -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
-     ```
-    - Verify that the EXTERNAL_ADDRESS was extracted correctly this may take a few minutes until the external IP is assigned
-     ```bash
-      echo $EXTERNAL_ADDRESS
-     ```
-    - Deploy the services and ingress rules to the cluster in the ingress-nginx namespace
-       make sure you are in the root directory (i.e. azure-aks-bitcoin-information)
-      ```bash
-          cd ..
-      ```
-      
-      ```bash
-        kubectl apply -f service-a/service-a.yaml
-      ```
-
-      ```bash
-        kubectl apply -f service-b/service-b.yaml
-      ```
-
-      ```bash
-        kubectl apply -f ingress-rules/ingress-rules.yaml
-      ```
-      
-    - Check the status of the pods
-     ```bash
-      kubectl get pods
-     ```
-    - Check the status of the ingress rules
-     ```bash
-      kubectl get ingress
-     ```
-
-4. **Test the application:**
-    - After the pods are running, you can test the application by sending requests to the ingress controller
-      ```bash
-        curl http://$EXTERNAL_ADDRESS/service-a
+        docker push $ACR_NAME.azurecr.io/service-a:latest
       ```
       ```bash
-        curl http://$EXTERNAL_ADDRESS/service-b
+        docker push $ACR_NAME.azurecr.io/service-b:latest
       ```
 
+# Manual Deployment using kubectl
+Follow the steps in the [aks-manual-deployment](aks-manual-deployment/README.md) directory to deploy the application to AKS using kubectl.
 
-5. **Destroy Terraform Resources:**
+# Deployment using Helm
+Follow the steps in the [aks-helm-deployment](my-chart/README.md) directory to deploy the application to AKS using Helm.
+
+### Clean up resources using terraform
+
+  **Destroy Terraform Resources:**
    - Destroy the Terraform-managed resources to delete the AKS cluster and Azure Container Registry.
      ```bash
      # Navigate to the terraform directory

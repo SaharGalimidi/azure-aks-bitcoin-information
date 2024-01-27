@@ -1,0 +1,21 @@
+# path: azure-aks-bitcoin-information\my-helm-chart\values.yaml
+replicaCount: 1
+image:
+  serviceA: bitcoinregistry.azurecr.io/service-a:latest
+  serviceB: bitcoinregistry.azurecr.io/service-b:latest
+
+ingress:
+  pathType: Prefix
+
+
+service:
+  serviceA:
+    name: service-a
+    type: ClusterIP
+    path: /service-a
+    port: 5000
+  serviceB:
+    name: service-b
+    type: ClusterIP
+    path: /service-b
+    port: 5000

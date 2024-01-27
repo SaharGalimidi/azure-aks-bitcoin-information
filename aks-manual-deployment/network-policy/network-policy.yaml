@@ -1,0 +1,44 @@
+#path: azure-aks-bitcoin-information/aks-manual-deployment/network-policy/network-policy.yaml
+#https://kubernetes.io/docs/concepts/services-networking/network-policies/
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: denay-a-to-b
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      name: service-a
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          name: service-b
+    ports:
+    - protocol: TCP
+      port: 5000
+
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: denay-b-to-a
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      name: service-b
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          name: service-a
+    ports:
+    - protocol: TCP
+      port: 5000

@@ -1,8 +1,0 @@
-image:
-  repository: bitcoin_registry.azurecr.io/service-a
-  tag: latest
-
-
-
-serviceInfo:
-  name: service-a

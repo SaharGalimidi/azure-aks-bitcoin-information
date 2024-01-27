@@ -196,14 +196,14 @@ Changes to Outputs:
   [32m+[0m[0m resource_group_id   = (known after apply)
   [32m+[0m[0m resource_group_name = "aks-bitcoin-rg"
 [0m[1mmodule.bitcoin-aks.azurerm_resource_group.bitcoin-rg: Creating...[0m[0m
-[0m[1mmodule.bitcoin-aks.azurerm_resource_group.bitcoin-rg: Creation complete after 5s [id=/subscriptions/0f31c15b-8b17-428a-8b56-7a902a2ec2d7/resourceGroups/aks-bitcoin-rg][0m
+[0m[1mmodule.bitcoin-aks.azurerm_resource_group.bitcoin-rg: Creation complete after 2s [id=/subscriptions/0f31c15b-8b17-428a-8b56-7a902a2ec2d7/resourceGroups/aks-bitcoin-rg][0m
 [0m[1mazurerm_container_registry.bitcoin_registry: Creating...[0m[0m
 [0m[1mmodule.bitcoin-aks.azurerm_kubernetes_cluster.bitcoin-aks: Creating...[0m[0m
 [0m[1mazurerm_container_registry.bitcoin_registry: Still creating... [10s elapsed][0m[0m
 [0m[1mmodule.bitcoin-aks.azurerm_kubernetes_cluster.bitcoin-aks: Still creating... [10s elapsed][0m[0m
 [0m[1mazurerm_container_registry.bitcoin_registry: Still creating... [20s elapsed][0m[0m
 [0m[1mmodule.bitcoin-aks.azurerm_kubernetes_cluster.bitcoin-aks: Still creating... [20s elapsed][0m[0m
-[0m[1mazurerm_container_registry.bitcoin_registry: Creation complete after 23s [id=/subscriptions/0f31c15b-8b17-428a-8b56-7a902a2ec2d7/resourceGroups/aks-bitcoin-rg/providers/Microsoft.ContainerRegistry/registries/bitcoinRegistry][0m
+[0m[1mazurerm_container_registry.bitcoin_registry: Creation complete after 24s [id=/subscriptions/0f31c15b-8b17-428a-8b56-7a902a2ec2d7/resourceGroups/aks-bitcoin-rg/providers/Microsoft.ContainerRegistry/registries/bitcoinRegistry][0m
 [0m[1mazurerm_role_assignment.acr_pull: Creating...[0m[0m
 [0m[1mazurerm_role_assignment.regestry_contributor: Creating...[0m[0m
 [0m[1mmodule.bitcoin-aks.azurerm_kubernetes_cluster.bitcoin-aks: Still creating... [30s elapsed][0m[0m
@@ -213,8 +213,8 @@ Changes to Outputs:
 [0m[1mazurerm_role_assignment.acr_pull: Still creating... [20s elapsed][0m[0m
 [0m[1mazurerm_role_assignment.regestry_contributor: Still creating... [20s elapsed][0m[0m
 [0m[1mmodule.bitcoin-aks.azurerm_kubernetes_cluster.bitcoin-aks: Still creating... [50s elapsed][0m[0m
-[0m[1mazurerm_role_assignment.acr_pull: Creation complete after 27s [id=/subscriptions/0f31c15b-8b17-428a-8b56-7a902a2ec2d7/resourceGroups/aks-bitcoin-rg/providers/Microsoft.ContainerRegistry/registries/bitcoinRegistry/providers/Microsoft.Authorization/roleAssignments/b6f99d3d-e0c5-4263-164f-b9b9bfc5919a][0m
-[0m[1mazurerm_role_assignment.regestry_contributor: Creation complete after 28s [id=/subscriptions/0f31c15b-8b17-428a-8b56-7a902a2ec2d7/resourceGroups/aks-bitcoin-rg/providers/Microsoft.ContainerRegistry/registries/bitcoinRegistry/providers/Microsoft.Authorization/roleAssignments/ba6ca8ba-0bf8-05e4-c962-baf664128b9d][0m
+[0m[1mazurerm_role_assignment.acr_pull: Creation complete after 28s [id=/subscriptions/0f31c15b-8b17-428a-8b56-7a902a2ec2d7/resourceGroups/aks-bitcoin-rg/providers/Microsoft.ContainerRegistry/registries/bitcoinRegistry/providers/Microsoft.Authorization/roleAssignments/de3844f6-824c-fb43-628f-b9e2e6147ef5][0m
+[0m[1mazurerm_role_assignment.regestry_contributor: Creation complete after 29s [id=/subscriptions/0f31c15b-8b17-428a-8b56-7a902a2ec2d7/resourceGroups/aks-bitcoin-rg/providers/Microsoft.ContainerRegistry/registries/bitcoinRegistry/providers/Microsoft.Authorization/roleAssignments/299db5a4-4366-afd0-0455-5a9dd41e85e8][0m
 [0m[1mmodule.bitcoin-aks.azurerm_kubernetes_cluster.bitcoin-aks: Still creating... [1m0s elapsed][0m[0m
 [0m[1mmodule.bitcoin-aks.azurerm_kubernetes_cluster.bitcoin-aks: Still creating... [1m10s elapsed][0m[0m
 [0m[1mmodule.bitcoin-aks.azurerm_kubernetes_cluster.bitcoin-aks: Still creating... [1m20s elapsed][0m[0m
@@ -236,32 +236,32 @@ Changes to Outputs:
 [0m[1mmodule.bitcoin-aks.azurerm_kubernetes_cluster.bitcoin-aks: Still creating... [4m0s elapsed][0m[0m
 [0m[1mmodule.bitcoin-aks.azurerm_kubernetes_cluster.bitcoin-aks: Still creating... [4m10s elapsed][0m[0m
 [0m[1mmodule.bitcoin-aks.azurerm_kubernetes_cluster.bitcoin-aks: Still creating... [4m20s elapsed][0m[0m
-[0m[1mmodule.bitcoin-aks.azurerm_kubernetes_cluster.bitcoin-aks: Creation complete after 4m29s [id=/subscriptions/0f31c15b-8b17-428a-8b56-7a902a2ec2d7/resourceGroups/aks-bitcoin-rg/providers/Microsoft.ContainerService/managedClusters/aks-bitcoin-cluster][0m
-[0m[1mazurerm_role_assignment.aks_cluster_admin: Creating...[0m[0m
+[0m[1mmodule.bitcoin-aks.azurerm_kubernetes_cluster.bitcoin-aks: Creation complete after 4m22s [id=/subscriptions/0f31c15b-8b17-428a-8b56-7a902a2ec2d7/resourceGroups/aks-bitcoin-rg/providers/Microsoft.ContainerService/managedClusters/aks-bitcoin-cluster][0m
 [0m[1mazurerm_role_assignment.aks_pull_acr: Creating...[0m[0m
+[0m[1mazurerm_role_assignment.aks_cluster_admin: Creating...[0m[0m
 [0m[1mmodule.bitcoin-aks.azurerm_role_assignment.aks_pull_acr: Creating...[0m[0m
-[0m[1mmodule.bitcoin-aks.azurerm_role_assignment.aks_rbac_admin: Creating...[0m[0m
 [0m[1mmodule.bitcoin-aks.azurerm_role_assignment.aks_cluster_admin: Creating...[0m[0m
-[0m[1mmodule.bitcoin-aks.azurerm_role_assignment.aks_rbac_admin: Still creating... [10s elapsed][0m[0m
-[0m[1mmodule.bitcoin-aks.azurerm_role_assignment.aks_pull_acr: Still creating... [10s elapsed][0m[0m
-[0m[1mazurerm_role_assignment.aks_pull_acr: Still creating... [10s elapsed][0m[0m
-[0m[1mmodule.bitcoin-aks.azurerm_role_assignment.aks_cluster_admin: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.bitcoin-aks.azurerm_role_assignment.aks_rbac_admin: Creating...[0m[0m
 [0m[1mazurerm_role_assignment.aks_cluster_admin: Still creating... [10s elapsed][0m[0m
+[0m[1mazurerm_role_assignment.aks_pull_acr: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.bitcoin-aks.azurerm_role_assignment.aks_pull_acr: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.bitcoin-aks.azurerm_role_assignment.aks_rbac_admin: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.bitcoin-aks.azurerm_role_assignment.aks_cluster_admin: Still creating... [10s elapsed][0m[0m
 [0m[1mazurerm_role_assignment.aks_cluster_admin: Still creating... [20s elapsed][0m[0m
-[0m[1mmodule.bitcoin-aks.azurerm_role_assignment.aks_rbac_admin: Still creating... [20s elapsed][0m[0m
-[0m[1mmodule.bitcoin-aks.azurerm_role_assignment.aks_pull_acr: Still creating... [20s elapsed][0m[0m
-[0m[1mmodule.bitcoin-aks.azurerm_role_assignment.aks_cluster_admin: Still creating... [20s elapsed][0m[0m
 [0m[1mazurerm_role_assignment.aks_pull_acr: Still creating... [20s elapsed][0m[0m
-[0m[1mmodule.bitcoin-aks.azurerm_role_assignment.aks_rbac_admin: Creation complete after 28s [id=/subscriptions/0f31c15b-8b17-428a-8b56-7a902a2ec2d7/resourceGroups/aks-bitcoin-rg/providers/Microsoft.ContainerService/managedClusters/aks-bitcoin-cluster/providers/Microsoft.Authorization/roleAssignments/c2e0be84-c111-c156-0479-e2251290fec6][0m
-[0m[1mazurerm_role_assignment.aks_pull_acr: Creation complete after 28s [id=/subscriptions/0f31c15b-8b17-428a-8b56-7a902a2ec2d7/resourceGroups/aks-bitcoin-rg/providers/Microsoft.ContainerRegistry/registries/bitcoinRegistry/providers/Microsoft.Authorization/roleAssignments/8b6535c2-fbb7-63ca-81bb-5be3d6b325ad][0m
-[0m[1mmodule.bitcoin-aks.azurerm_role_assignment.aks_cluster_admin: Creation complete after 29s [id=/subscriptions/0f31c15b-8b17-428a-8b56-7a902a2ec2d7/resourceGroups/aks-bitcoin-rg/providers/Microsoft.ContainerService/managedClusters/aks-bitcoin-cluster/providers/Microsoft.Authorization/roleAssignments/f3beeda5-0b2a-d942-aa02-6d837411de29][0m
-[0m[1mazurerm_role_assignment.aks_cluster_admin: Creation complete after 29s [id=/subscriptions/0f31c15b-8b17-428a-8b56-7a902a2ec2d7/resourceGroups/aks-bitcoin-rg/providers/Microsoft.ContainerService/managedClusters/aks-bitcoin-cluster/providers/Microsoft.Authorization/roleAssignments/d21b5fb2-7cf9-17ed-faad-a6ef6478cb5d][0m
-[0m[1mmodule.bitcoin-aks.azurerm_role_assignment.aks_pull_acr: Creation complete after 29s [id=/subscriptions/0f31c15b-8b17-428a-8b56-7a902a2ec2d7/resourceGroups/aks-bitcoin-rg/providers/Microsoft.ContainerService/managedClusters/aks-bitcoin-cluster/providers/Microsoft.Authorization/roleAssignments/8cfaa36a-3bdf-8a31-6d45-d5b83b89b326][0m
+[0m[1mmodule.bitcoin-aks.azurerm_role_assignment.aks_pull_acr: Still creating... [20s elapsed][0m[0m
+[0m[1mmodule.bitcoin-aks.azurerm_role_assignment.aks_rbac_admin: Still creating... [20s elapsed][0m[0m
+[0m[1mmodule.bitcoin-aks.azurerm_role_assignment.aks_cluster_admin: Still creating... [20s elapsed][0m[0m
+[0m[1mazurerm_role_assignment.aks_pull_acr: Creation complete after 28s [id=/subscriptions/0f31c15b-8b17-428a-8b56-7a902a2ec2d7/resourceGroups/aks-bitcoin-rg/providers/Microsoft.ContainerRegistry/registries/bitcoinRegistry/providers/Microsoft.Authorization/roleAssignments/c6477a73-be4e-2540-3590-8c996ad5b6a8][0m
+[0m[1mmodule.bitcoin-aks.azurerm_role_assignment.aks_cluster_admin: Creation complete after 28s [id=/subscriptions/0f31c15b-8b17-428a-8b56-7a902a2ec2d7/resourceGroups/aks-bitcoin-rg/providers/Microsoft.ContainerService/managedClusters/aks-bitcoin-cluster/providers/Microsoft.Authorization/roleAssignments/1da0b678-5881-448f-5b9b-7ba8b855e813][0m
+[0m[1mazurerm_role_assignment.aks_cluster_admin: Creation complete after 29s [id=/subscriptions/0f31c15b-8b17-428a-8b56-7a902a2ec2d7/resourceGroups/aks-bitcoin-rg/providers/Microsoft.ContainerService/managedClusters/aks-bitcoin-cluster/providers/Microsoft.Authorization/roleAssignments/0ddf7908-d6e6-196f-ab3d-93329578759e][0m
+[0m[1mmodule.bitcoin-aks.azurerm_role_assignment.aks_pull_acr: Creation complete after 29s [id=/subscriptions/0f31c15b-8b17-428a-8b56-7a902a2ec2d7/resourceGroups/aks-bitcoin-rg/providers/Microsoft.ContainerService/managedClusters/aks-bitcoin-cluster/providers/Microsoft.Authorization/roleAssignments/4ab6aa3c-8753-2206-2979-b2d9e8768c0d][0m
+[0m[1mmodule.bitcoin-aks.azurerm_role_assignment.aks_rbac_admin: Creation complete after 30s [id=/subscriptions/0f31c15b-8b17-428a-8b56-7a902a2ec2d7/resourceGroups/aks-bitcoin-rg/providers/Microsoft.ContainerService/managedClusters/aks-bitcoin-cluster/providers/Microsoft.Authorization/roleAssignments/b2fcaba4-b2ce-1b9f-d038-bc313eee0b03][0m
 [0m[1mnull_resource.aks_acr_attachment: Creating...[0m[0m
 [0m[1mnull_resource.aks_acr_attachment: Provisioning with 'local-exec'...[0m[0m
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0mExecuting: ["cmd" "/C" "az aks update -n aks-bitcoin-cluster -g aks-bitcoin-rg --attach-acr bitcoinRegistry"]
-[0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0mAAD role propagation done[############################################]  100.0000%
 [0m[1mnull_resource.aks_acr_attachment: Still creating... [10s elapsed][0m[0m
+[0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0mAAD role propagation done[############################################]  100.0000%
 [0m[1mnull_resource.aks_acr_attachment: Still creating... [20s elapsed][0m[0m
 [0m[1mnull_resource.aks_acr_attachment: Still creating... [30s elapsed][0m[0m
 [0m[1mnull_resource.aks_acr_attachment: Still creating... [40s elapsed][0m[0m
@@ -275,7 +275,8 @@ Changes to Outputs:
 [0m[1mnull_resource.aks_acr_attachment: Still creating... [2m0s elapsed][0m[0m
 [0m[1mnull_resource.aks_acr_attachment: Still creating... [2m10s elapsed][0m[0m
 [0m[1mnull_resource.aks_acr_attachment: Still creating... [2m20s elapsed][0m[0m
-[0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0mAAD role propagation done[############################################]  100.0000%{
+[0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0mAAD role propagation done[############################################]  100.0000%
+[0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m{
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m  "aadProfile": {
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m    "adminGroupObjectIDs": null,
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m    "adminUsers": null,
@@ -352,7 +353,7 @@ Changes to Outputs:
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m      "kubeStateMetrics": null
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m    }
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m  },
-[0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m  "azurePortalFqdn": "aks-bitcoin-dns-s2it6cnq.portal.hcp.eastus.azmk8s.io",
+[0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m  "azurePortalFqdn": "aks-bitcoin-dns-3udjlkd2.portal.hcp.eastus.azmk8s.io",
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m  "currentKubernetesVersion": "1.27.7",
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m  "disableLocalAccounts": false,
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m  "diskEncryptionSetId": null,
@@ -360,21 +361,21 @@ Changes to Outputs:
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m  "enablePodSecurityPolicy": null,
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m  "enableRbac": true,
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m  "extendedLocation": null,
-[0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m  "fqdn": "aks-bitcoin-dns-s2it6cnq.hcp.eastus.azmk8s.io",
+[0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m  "fqdn": "aks-bitcoin-dns-3udjlkd2.hcp.eastus.azmk8s.io",
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m  "fqdnSubdomain": null,
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m  "httpProxyConfig": null,
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m  "id": "/subscriptions/0f31c15b-8b17-428a-8b56-7a902a2ec2d7/resourcegroups/aks-bitcoin-rg/providers/Microsoft.ContainerService/managedClusters/aks-bitcoin-cluster",
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m  "identity": {
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m    "delegatedResources": null,
-[0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m    "principalId": "ef8c83b2-1168-4a4a-bfb6-e5708f8d05e3",
+[0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m    "principalId": "ac2e6784-7352-4907-b2c1-77bdb91cc01d",
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m    "tenantId": "d561d5ad-eb2c-4774-939b-1eaa998ffdcc",
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m    "type": "SystemAssigned",
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m    "userAssignedIdentities": null
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m  },
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m  "identityProfile": {
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m    "kubeletidentity": {
-[0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m      "clientId": "1240529e-8c9e-4627-8b7e-739f173f9be7",
-[0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m      "objectId": "f4100c10-eeff-4467-96d6-d39f6870e165",
+[0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m      "clientId": "fe88e38f-426a-4444-845a-2560a829686e",
+[0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m      "objectId": "50d470a0-c540-46b3-8cb4-ebdb46856561",
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m      "resourceId": "/subscriptions/0f31c15b-8b17-428a-8b56-7a902a2ec2d7/resourcegroups/MC_aks-bitcoin-rg_aks-bitcoin-cluster_eastus/providers/Microsoft.ManagedIdentity/userAssignedIdentities/aks-bitcoin-cluster-agentpool"
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m    }
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m  },
@@ -393,7 +394,7 @@ Changes to Outputs:
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m      "backendPoolType": "nodeIPConfiguration",
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m      "effectiveOutboundIPs": [
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m        {
-[0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m          "id": "/subscriptions/0f31c15b-8b17-428a-8b56-7a902a2ec2d7/resourceGroups/MC_aks-bitcoin-rg_aks-bitcoin-cluster_eastus/providers/Microsoft.Network/publicIPAddresses/03d0ac57-2fa8-40df-88fd-82c8a493e3ed",
+[0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m          "id": "/subscriptions/0f31c15b-8b17-428a-8b56-7a902a2ec2d7/resourceGroups/MC_aks-bitcoin-rg_aks-bitcoin-cluster_eastus/providers/Microsoft.Network/publicIPAddresses/1942e33b-f317-42e1-966c-617ed01d891f",
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m          "resourceGroup": "MC_aks-bitcoin-rg_aks-bitcoin-cluster_eastus"
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m        }
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m      ],
@@ -437,7 +438,7 @@ Changes to Outputs:
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m  "provisioningState": "Succeeded",
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m  "publicNetworkAccess": null,
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m  "resourceGroup": "aks-bitcoin-rg",
-[0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m  "resourceUid": "65b380c8e94d100001feffd9",
+[0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m  "resourceUid": "65b50f07e94d100001ff042e",
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m  "securityProfile": {
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m    "azureKeyVaultKms": null,
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m    "defender": null,
@@ -479,7 +480,7 @@ Changes to Outputs:
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m    "verticalPodAutoscaler": null
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m  }
 [0m[1mnull_resource.aks_acr_attachment (local-exec):[0m [0m}
-[0m[1mnull_resource.aks_acr_attachment: Creation complete after 2m23s [id=5902788772995697687][0m
+[0m[1mnull_resource.aks_acr_attachment: Creation complete after 2m29s [id=4060687411158364383][0m
 [0m[1m[32m
 Apply complete! Resources: 11 added, 0 changed, 0 destroyed.
 [0m[0m[1m[32m

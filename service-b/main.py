@@ -2,31 +2,35 @@
 from flask import Flask, jsonify
 import requests
 import datetime
-
-
+import json
+from collections import OrderedDict
 app = Flask(__name__)
 
-API_ENDPOINT = 'https://api.coingecko.com/api/v3/simple/price'
+API_ENDPOINT = 'https://min-api.cryptocompare.com/data/price'
 
 
 @app.route('/', methods=['GET'])
-def index():
-    return "Hello from Service B please use /service-b to get the coin value you want"
-
+def check_pod_health():
+    return "Hello from Service B im healthy"
 
 @app.route('/service-b', methods=['GET'])
-def get_service_a_data(coin: str = 'bitcoin', currency: str = 'usd'):
+def get_service_a_data(coin: str = 'BTC', currency: str = 'USD'):
     try:
-        params = {'ids': coin, 'vs_currencies': currency}
-        response = requests.get(API_ENDPOINT, params=params)
-        response.raise_for_status()
-        data = response.json()
-        coin_value = data.get(coin).get(currency)
-        print(
-            f"Current {coin} Value (Service B): {coin_value} {currency} {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-        return jsonify({coin: coin_value, "timestamp": datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')})
+        with app.app_context():
+            end_point = f"{API_ENDPOINT}?fsym={coin}&tsyms={currency}"
+            response = requests.get(end_point)
+            response.raise_for_status()
+            data = response.json()
+            coin_value = data.get('USD')
+            print(f"Current {coin} Value (Service B): {coin_value} {currency} {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+            order_info = OrderedDict([('coin', coin), 
+                                      ('value', coin_value),
+                                      ('currency', currency), 
+                                      ('timestamp', datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))])
+            
+            return json.dumps(order_info, indent=4)
     except requests.exceptions.RequestException as e:
-        return jsonify({"error": f"Error fetching data from Service B: {e}"}), 500
+        return json.dumps({f"({coin} value in {currency} (latest price since there are too many requests)": coin_value}, indent=4)
 
 
 if __name__ == "__main__":

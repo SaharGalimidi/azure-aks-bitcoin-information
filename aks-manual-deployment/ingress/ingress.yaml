@@ -1,3 +1,4 @@
+#path: azure-aks-bitcoin-information/aks-manual-deployment/ingress/ingress.yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:

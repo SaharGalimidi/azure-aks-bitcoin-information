@@ -1,0 +1,41 @@
+#path: azure-aks-bitcoin-information\my-helm-chart\templates\ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hello-world-ingress
+  namespace: default
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  ingressClassName: nginx
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: {{ .Values.ingress.pathType }}
+            backend:
+              service:
+                name: {{ .Values.service.serviceA.name }}
+                port:
+                  number: {{ .Values.service.serviceA.port }}
+          - path: {{ .Values.service.serviceA.path}}
+            pathType: {{ .Values.ingress.pathType}}
+            backend:
+              service:
+                name: {{ .Values.service.serviceA.name }}
+                port:
+                  number: {{ .Values.service.serviceA.port }}
+          - path: /
+            pathType: {{ .Values.ingress.pathType }}
+            backend:
+              service:
+                name: {{ .Values.service.serviceB.name }}
+                port:
+                  number: {{ .Values.service.serviceB.port }}
+          - path: {{ .Values.service.serviceB.path}}
+            pathType: {{ .Values.ingress.pathType}}
+            backend:
+              service:
+                name: {{ .Values.service.serviceB.name }}
+                port:
+                  number: {{ .Values.service.serviceB.port }}
