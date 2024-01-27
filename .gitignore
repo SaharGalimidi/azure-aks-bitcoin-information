@@ -2,3 +2,5 @@
 .terraform.*
 terraform.tf*
 terraform_output.txt
+my-chart-0.1.0.tgz
+```
