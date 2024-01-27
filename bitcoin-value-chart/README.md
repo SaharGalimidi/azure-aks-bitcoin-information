@@ -24,12 +24,12 @@ EXTERNAL_ADDRESS=$(kubectl get svc ingress-nginx-controller -n ingress-nginx -o 
 
 - 3. Package the Helm Charts
 ```bash
-helm package my-chart
+helm package bitcoin-value-chart
 ```
 
 - 4. Deploy the Helm Charts
 ```bash
-helm install my-chart my-chart-0.1.0.tgz
+helm install bitcoin-value-chart bitcoin-value-chart-0.1.0.tgz
 ```
 
 - 5. Check Pod and Ingress Status

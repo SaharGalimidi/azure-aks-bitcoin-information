@@ -1,6 +1,6 @@
 # path: azure-aks-bitcoin-information\my-helm-chart\Chart.yaml
 apiVersion: v2
-name: my-chart
+name: bitcoin-value-chart
 version: 0.1.0
 description: A Helm chart for my Kubernetes deployment
 type: application
