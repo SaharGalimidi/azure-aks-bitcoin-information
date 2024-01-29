@@ -114,7 +114,7 @@ Install Helm following the instructions [here](https://helm.sh/docs/intro/instal
 Follow the steps in the [aks-manual-deployment](aks-manual-deployment/README.md) directory to deploy the application to AKS using kubectl.
 
 # Deployment using Helm
-Follow the steps in the [aks-helm-deployment](my-chart/README.md) directory to deploy the application to AKS using Helm.
+Follow the steps in the [aks-helm-deployment](bitcoin-value-chart/README.md) directory to deploy the application to AKS using Helm.
 
 ### Clean up resources using terraform
 
